@@ -1,15 +1,16 @@
+#include <exception>
 #include <iostream>
-#include <string>
+
+#include "repl.hpp"
 
 int main() {
   // Flush after every std::cout / std:cerr
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
-  std::cout << "$ ";
-
-  std::string user_input;
-  std::getline(std::cin, user_input);
-
-  std::cout << user_input << ": command not found" << std::endl;
+  try {
+    repl::Repl().Run();
+  } catch(std::exception ex) {
+    std::cerr << "REPL stopped unexpectedly. " << ex.what() << std::endl;
+  }
 }
