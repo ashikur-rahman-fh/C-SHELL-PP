@@ -6,5 +6,10 @@ int main() {
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
+  std::string user_input;
+  std::getline(std::cin, user_input);
+
   std::cout << "$ ";
+
+  std::cout << user_input << ": command not found" << std::endl;
 }
