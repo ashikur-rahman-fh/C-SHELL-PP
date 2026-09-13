@@ -13,8 +13,10 @@ add_library(shell_lib
     src/command_executor.cpp
     src/repl.cpp
     src/executable.cpp
-    src/parser
+    src/parser.cpp
     src/builtins/builtin.cpp
+    src/builtins/exit.cpp
+    src/exe_builder.cpp
 )
 
 target_include_directories(shell_lib

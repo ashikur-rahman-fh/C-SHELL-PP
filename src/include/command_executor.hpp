@@ -2,6 +2,7 @@
 
 #include "executable.hpp"
 #include "utils.hpp"
+#include <memory>
 
 namespace shell {
 
@@ -9,14 +10,14 @@ class CommandExecutor {
 public:
   CommandExecutor() = delete;
 
-  CommandExecutor(const Executable &exe);
+  CommandExecutor(std::shared_ptr<IExecutable> exe);
 
-  Executable GetExe() const;
+  std::shared_ptr<IExecutable> GetExe() const;
 
   utils::LoopDecision Execute();
 
 private:
-  Executable exe_m;
+  std::shared_ptr<IExecutable> exe_m;
 };
 
 } // shell ends

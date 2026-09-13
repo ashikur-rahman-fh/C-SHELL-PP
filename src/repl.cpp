@@ -3,9 +3,9 @@
 
 #include "repl.hpp"
 #include "command_executor.hpp"
-#include "executable.hpp"
 #include "parser.hpp"
 #include "utils.hpp"
+#include "exe_builder.hpp"
 
 namespace repl {
 
@@ -20,8 +20,8 @@ void Repl::Run() const {
     std::getline(std::cin, userInput);
 
     try {
-      const shell::Executable exe = parser::ParseExecutable(userInput);
-      utils::LoopDecision decision = shell::CommandExecutor(exe).Execute();
+      std::vector<std::string> inputTokens = parser::Parse(userInput);
+      utils::LoopDecision decision = shell::CommandExecutor(shell::ExeBuilder().build(inputTokens)).Execute();
       if (decision == utils::LoopDecision::Continue) {
         continue;
       } else if (decision == utils::LoopDecision::Break) {

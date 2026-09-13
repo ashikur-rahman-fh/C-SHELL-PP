@@ -27,9 +27,15 @@ TEST(Parser, TestSplitWithMultipleDelimiter) {
 
 TEST(Parser, TestParseExecutable) {
   auto out = parser::ParseExecutable("hello world");
-  std::string expCmd = out.GetCmd();
-  std::vector<std::string> expArgv = out.GetArgv();
+  std::string expCmd = out -> GetCmd();
+  std::vector<std::string> expArgv = out -> GetArgv();
 
   EXPECT_EQ(expCmd, "hello");
   EXPECT_EQ(expArgv, std::vector<std::string> {"world"});
+}
+
+TEST(Parser, TestParse) {
+  auto out = parser::Split("This,    sentence,    has,,, ,  space,and what?", " ,");
+  std::vector<std::string> exp = {"This", "sentence", "has", "space", "and", "what?"};
+  EXPECT_EQ(exp, out);
 }

@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include "executable.hpp"
 #include <cstddef>
+#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -26,8 +27,12 @@ namespace parser {
   }
 
 
-  shell::Executable ParseExecutable(const std::string &input) {
+  std::shared_ptr<shell::IExecutable> ParseExecutable(const std::string &input) {
     auto tokens = Split(input);
-    return shell::Executable(tokens.front(), std::vector<std::string> (tokens.begin() + 1, tokens.end()));
+    return std::make_shared<shell::Executable> (tokens.front(), std::vector<std::string> (tokens.begin() + 1, tokens.end()));
+  }
+
+  std::vector<std::string> Parse(const std::string &input) {
+    return Split(input);
   }
 }

@@ -1,9 +1,30 @@
 #include "builtins/builtin.hpp"
+#include "executable.hpp"
 #include <algorithm>
+#include <memory>
 
 namespace builtin {
+  bool IsBuiltIn(std::shared_ptr<shell::IExecutable> exe) {
+    return std::find_if(builtins.begin(), builtins.end(), [&] (const auto &val) {
+      return val.first == exe->GetCmd();
+    }) != builtins.end();
+  }
 
-  bool IsBuiltIn(const shell::Executable &exe) {
-    return std::find(builtins.begin(), builtins.end(), exe.GetCmd()) != builtins.end();
+  bool IsBuiltIn(const std::string &cmd) {
+    return std::find_if(builtins.begin(), builtins.end(), [&] (const auto &val) {
+      return val.first == cmd;
+    }) != builtins.end();
+  }
+
+  BuiltinType GetBuiltinType(const std::string &cmd) {
+    return std::find_if(builtins.begin(), builtins.end(), [&] (const auto &val) {
+      return val.first == cmd;
+    })->second;
+  }
+
+  BuiltinType GetBuiltinType(std::shared_ptr<shell::IExecutable> exe) {
+    return std::find_if(builtins.begin(), builtins.end(), [&] (const auto &val) {
+      return val.first == exe->GetCmd();
+    })->second;
   }
 }

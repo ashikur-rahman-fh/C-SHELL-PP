@@ -1,4 +1,6 @@
 #include "executable.hpp"
+#include "utils.hpp"
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -19,4 +21,9 @@ namespace shell {
   std::vector<std::string> Executable::GetArgv() const {
     return this -> argv_m;
   }
+
+  utils::LoopDecision Executable::Run() const {
+    throw std::logic_error { "Unreachable" };
+  }
+
 }
