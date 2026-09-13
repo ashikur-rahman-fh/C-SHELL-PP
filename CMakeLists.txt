@@ -16,6 +16,7 @@ add_library(shell_lib
     src/parser.cpp
     src/builtins/builtin.cpp
     src/builtins/exit.cpp
+    src/builtins/echo.cpp
     src/exe_builder.cpp
 )
 

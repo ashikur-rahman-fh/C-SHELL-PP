@@ -1,5 +1,6 @@
 #include "exe_builder.hpp"
 #include "builtin.hpp"
+#include "echo.hpp"
 #include "executable.hpp"
 #include <memory>
 #include <stdexcept>
@@ -16,6 +17,8 @@ std::shared_ptr<IExecutable> ExeBuilder::build(std::vector<std::string> &inputTo
     switch (builtin::GetBuiltinType(cmd)) {
       case builtin::BuiltinType::ExitCmd:
         return std::make_shared<builtin::Exit> (cmd, argv);
+      case builtin::BuiltinType::EchoCmd:
+        return std::make_shared<builtin::Echo> (cmd, argv);
       default:
         throw std::logic_error {"Invalid builtin type"};
     }
