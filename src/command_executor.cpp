@@ -19,7 +19,7 @@ namespace shell {
     if (builtin::IsBuiltIn(this -> exe_m)) {
       return utils::LoopDecision::Break;
     }
-    throw utils::ShellError(std::format("{}: command_executor not found", this -> exe_m.GetCmd()),
+    throw utils::ShellError(std::format("{}: command not found", this -> exe_m.GetCmd()),
       utils::LoopDecision::Continue);
   }
 
