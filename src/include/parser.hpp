@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -8,7 +7,7 @@
 
 namespace parser {
 
-std::shared_ptr<shell::IExecutable> ParseExecutable(const std::string& input);
+shell::ExecutableContext ParseExecutableContext(const std::string& input);
 
 std::vector<std::string> Split(std::string_view input, std::string_view delimiter = " ");
 

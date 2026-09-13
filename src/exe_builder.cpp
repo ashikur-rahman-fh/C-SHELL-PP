@@ -19,15 +19,32 @@ std::shared_ptr<IExecutable> ExeBuilder::build(std::vector<std::string>& inputTo
   if (builtin::IsBuiltIn(cmd)) {
     switch (builtin::GetBuiltinType(cmd)) {
       case builtin::BuiltinType::ExitCmd:
-        return std::make_shared<builtin::Exit>(cmd, argv);
+        return std::make_shared<builtin::Exit>();
       case builtin::BuiltinType::EchoCmd:
-        return std::make_shared<builtin::Echo>(cmd, argv);
+        return std::make_shared<builtin::Echo>();
       default:
         throw std::logic_error{"Invalid builtin type"};
     }
   }
 
-  return std::make_shared<Executable>(cmd, argv);
+  return std::make_shared<Executable>();
+}
+
+std::shared_ptr<IExecutable> ExeBuilder::build(const ExecutableContext& context) {
+  const std::string cmd = context.GetCmd();
+
+  if (builtin::IsBuiltIn(cmd)) {
+    switch (builtin::GetBuiltinType(cmd)) {
+      case builtin::BuiltinType::ExitCmd:
+        return std::make_shared<builtin::Exit>();
+      case builtin::BuiltinType::EchoCmd:
+        return std::make_shared<builtin::Echo>();
+      default:
+        throw std::logic_error{"Invalid builtin type"};
+    }
+  }
+
+  return std::make_shared<Executable>();
 }
 
 }  // namespace shell

@@ -27,9 +27,9 @@ TEST(Parser, TestSplitWithMultipleDelimiter) {
 }
 
 TEST(Parser, TestParseExecutable) {
-  auto out = parser::ParseExecutable("hello world");
-  std::string expCmd = out->GetCmd();
-  std::vector<std::string> expArgv = out->GetArgv();
+  auto out = parser::ParseExecutableContext("hello world");
+  std::string expCmd = out.GetCmd();
+  std::vector<std::string> expArgv = out.GetArgv();
 
   EXPECT_EQ(expCmd, "hello");
   EXPECT_EQ(expArgv, std::vector<std::string>{"world"});

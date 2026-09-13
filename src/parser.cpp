@@ -1,7 +1,6 @@
 #include "parser.hpp"
 
 #include <cstddef>
-#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -28,10 +27,10 @@ std::vector<std::string> Split(std::string_view input, std::string_view delimite
   return result;
 }
 
-std::shared_ptr<shell::IExecutable> ParseExecutable(const std::string& input) {
+shell::ExecutableContext ParseExecutableContext(const std::string& input) {
   auto tokens = Split(input);
-  return std::make_shared<shell::Executable>(
-      tokens.front(), std::vector<std::string>(tokens.begin() + 1, tokens.end()));
+  return shell::ExecutableContext(tokens.front(),
+                                  std::vector<std::string>(tokens.begin() + 1, tokens.end()));
 }
 
 std::vector<std::string> Parse(const std::string& input) {

@@ -18,11 +18,11 @@ std::shared_ptr<IExecutable> CommandExecutor::GetExe() const {
   return this->exe_m;
 }
 
-utils::LoopDecision CommandExecutor::Execute() {
-  if (builtin::IsBuiltIn(this->exe_m)) {
-    return exe_m->Run();
+utils::LoopDecision CommandExecutor::Execute(const ExecutableContext& context) {
+  if (builtin::IsBuiltIn(context.GetCmd())) {
+    return exe_m->Run(context);
   }
-  throw utils::ShellError(std::format("{}: command not found", this->exe_m->GetCmd()),
+  throw utils::ShellError(std::format("{}: command not found", context.GetCmd()),
                           utils::LoopDecision::Continue);
 }
 

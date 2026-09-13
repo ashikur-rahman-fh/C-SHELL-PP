@@ -5,6 +5,7 @@
 
 #include "command_executor.hpp"
 #include "exe_builder.hpp"
+#include "executable.hpp"
 #include "parser.hpp"
 #include "utils.hpp"
 
@@ -22,8 +23,10 @@ void Repl::Run() const {
 
     try {
       std::vector<std::string> inputTokens = parser::Parse(userInput);
+      const shell::ExecutableContext exeContext = parser::ParseExecutableContext(userInput);
+
       utils::LoopDecision decision =
-          shell::CommandExecutor(shell::ExeBuilder().build(inputTokens)).Execute();
+          shell::CommandExecutor(shell::ExeBuilder().build(exeContext)).Execute(exeContext);
       if (decision == utils::LoopDecision::Continue) {
         continue;
       } else if (decision == utils::LoopDecision::Break) {

@@ -15,7 +15,7 @@ class CommandExecutor {
 
   std::shared_ptr<IExecutable> GetExe() const;
 
-  utils::LoopDecision Execute();
+  utils::LoopDecision Execute(const ExecutableContext& context);
 
  private:
   std::shared_ptr<IExecutable> exe_m;
