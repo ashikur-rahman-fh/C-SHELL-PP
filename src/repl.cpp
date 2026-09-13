@@ -2,7 +2,9 @@
 #include <string>
 
 #include "repl.hpp"
-#include "command.hpp"
+#include "command_executor.hpp"
+#include "executable.hpp"
+#include "parser.hpp"
 #include "utils.hpp"
 
 namespace repl {
@@ -18,13 +20,13 @@ void Repl::Run() const {
     std::getline(std::cin, userInput);
 
     try {
-      utils::LoopDecision decision = shell::Command(userInput).Execute();
+      const shell::Executable exe = parser::ParseExecutable(userInput);
+      utils::LoopDecision decision = shell::CommandExecutor(exe).Execute();
       if (decision == utils::LoopDecision::Continue) {
         continue;
       } else if (decision == utils::LoopDecision::Break) {
         break;
       }
-
     } catch (utils::ShellError error) {
       std::cout << error.what() << std::endl;
       if (error.getLoopDecision() == utils::LoopDecision::Continue) {

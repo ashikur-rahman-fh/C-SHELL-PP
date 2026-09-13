@@ -1,0 +1,33 @@
+#include "parser.hpp"
+#include "executable.hpp"
+#include <cstddef>
+#include <string>
+#include <string_view>
+#include <vector>
+
+namespace parser {
+  std::vector<std::string> Split(std::string_view input, std::string_view delimiter) {
+    std::vector<std::string> result;
+
+    size_t start = input.find_first_not_of(delimiter);
+    while (start != std::string::npos) {
+      size_t end = input.find_first_of(delimiter, start);
+
+      if (end == std::string::npos) {
+        result.emplace_back(input.substr(start));
+        break;
+      }
+
+      result.emplace_back(input.substr(start, end - start));
+      start = input.find_first_not_of(delimiter, end);
+    }
+
+    return result;
+  }
+
+
+  shell::Executable ParseExecutable(const std::string &input) {
+    auto tokens = Split(input);
+    return shell::Executable(tokens.front(), std::vector<std::string> (tokens.begin() + 1, tokens.end()));
+  }
+}
