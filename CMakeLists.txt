@@ -14,11 +14,12 @@ add_library(shell_lib
     src/repl.cpp
     src/executable.cpp
     src/parser.cpp
+    src/exe_builder.cpp
+    src/path_helper.cpp
     src/builtins/builtin.cpp
     src/builtins/exit.cpp
     src/builtins/echo.cpp
     src/builtins/type.cpp
-    src/exe_builder.cpp
 )
 
 target_include_directories(shell_lib
