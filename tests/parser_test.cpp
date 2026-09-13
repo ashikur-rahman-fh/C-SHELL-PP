@@ -1,8 +1,9 @@
-#include <gtest/gtest.h>
+#include "parser.hpp"
+
 #include <string>
 #include <vector>
 
-#include "parser.hpp"
+#include <gtest/gtest.h>
 
 TEST(Parser, TestSplit) {
   auto out = parser::Split("This sentence has space.");
@@ -27,11 +28,11 @@ TEST(Parser, TestSplitWithMultipleDelimiter) {
 
 TEST(Parser, TestParseExecutable) {
   auto out = parser::ParseExecutable("hello world");
-  std::string expCmd = out -> GetCmd();
-  std::vector<std::string> expArgv = out -> GetArgv();
+  std::string expCmd = out->GetCmd();
+  std::vector<std::string> expArgv = out->GetArgv();
 
   EXPECT_EQ(expCmd, "hello");
-  EXPECT_EQ(expArgv, std::vector<std::string> {"world"});
+  EXPECT_EQ(expArgv, std::vector<std::string>{"world"});
 }
 
 TEST(Parser, TestParse) {

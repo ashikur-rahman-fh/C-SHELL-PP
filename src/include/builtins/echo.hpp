@@ -4,12 +4,12 @@
 namespace builtin {
 
 class Echo : public shell::IExecutable {
-public:
+ public:
   Echo() = default;
 
-  explicit Echo(const std::string &cmd);
+  explicit Echo(const std::string& cmd);
 
-  explicit Echo(const std::string &cmd, const std::vector<std::string> &argv);
+  explicit Echo(const std::string& cmd, const std::vector<std::string>& argv);
 
   std::string GetCmd() const override;
 
@@ -17,8 +17,8 @@ public:
 
   utils::LoopDecision Run() const override;
 
-private:
+ private:
   std::string cmd_m;
   std::vector<std::string> argv_m;
 };
-}
+}  // namespace builtin

@@ -1,13 +1,14 @@
 #pragma once
 
+#include <memory>
+
 #include "executable.hpp"
 #include "utils.hpp"
-#include <memory>
 
 namespace shell {
 
 class CommandExecutor {
-public:
+ public:
   CommandExecutor() = delete;
 
   CommandExecutor(std::shared_ptr<IExecutable> exe);
@@ -16,8 +17,8 @@ public:
 
   utils::LoopDecision Execute();
 
-private:
+ private:
   std::shared_ptr<IExecutable> exe_m;
 };
 
-} // shell ends
+}  // namespace shell

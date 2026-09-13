@@ -1,11 +1,12 @@
+#include "repl.hpp"
+
 #include <iostream>
 #include <string>
 
-#include "repl.hpp"
 #include "command_executor.hpp"
+#include "exe_builder.hpp"
 #include "parser.hpp"
 #include "utils.hpp"
-#include "exe_builder.hpp"
 
 namespace repl {
 
@@ -15,13 +16,14 @@ Repl::Repl() {
 
 void Repl::Run() const {
   while (true) {
-  std::cout << promptSymbol_m << " ";
+    std::cout << promptSymbol_m << " ";
     std::string userInput;
     std::getline(std::cin, userInput);
 
     try {
       std::vector<std::string> inputTokens = parser::Parse(userInput);
-      utils::LoopDecision decision = shell::CommandExecutor(shell::ExeBuilder().build(inputTokens)).Execute();
+      utils::LoopDecision decision =
+          shell::CommandExecutor(shell::ExeBuilder().build(inputTokens)).Execute();
       if (decision == utils::LoopDecision::Continue) {
         continue;
       } else if (decision == utils::LoopDecision::Break) {
@@ -42,8 +44,8 @@ std::string Repl::getPromptSymbol() const {
   return promptSymbol_m;
 }
 
-void Repl::setPromptSymbol(const std::string &promptSymbol) {
+void Repl::setPromptSymbol(const std::string& promptSymbol) {
   this->promptSymbol_m = promptSymbol;
 }
 
-}
+}  // namespace repl

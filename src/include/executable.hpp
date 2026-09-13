@@ -1,13 +1,14 @@
 #pragma once
 
-#include "utils.hpp"
 #include <string>
 #include <vector>
+
+#include "utils.hpp"
 
 namespace shell {
 
 class IExecutable {
-public:
+ public:
   virtual utils::LoopDecision Run() const = 0;
 
   virtual std::string GetCmd() const = 0;
@@ -16,12 +17,12 @@ public:
 };
 
 class Executable : public IExecutable {
-public:
+ public:
   Executable() = default;
 
-  explicit Executable(const std::string &cmd);
+  explicit Executable(const std::string& cmd);
 
-  explicit Executable(const std::string &cmd, const std::vector<std::string> &argv);
+  explicit Executable(const std::string& cmd, const std::vector<std::string>& argv);
 
   std::string GetCmd() const override;
 
@@ -29,9 +30,9 @@ public:
 
   utils::LoopDecision Run() const override;
 
-private:
+ private:
   std::string cmd_m;
   std::vector<std::string> argv_m;
 };
 
-}
+}  // namespace shell

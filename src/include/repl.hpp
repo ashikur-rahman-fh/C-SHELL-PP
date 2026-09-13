@@ -4,17 +4,17 @@
 namespace repl {
 
 class Repl {
-public:
+ public:
   Repl();
 
   void Run() const;
 
   std::string getPromptSymbol() const;
 
-  void setPromptSymbol(const std::string &promptSymbol);
+  void setPromptSymbol(const std::string& promptSymbol);
 
-  private:
+ private:
   std::string promptSymbol_m;
 };
 
-} // repl ends
+}  // namespace repl

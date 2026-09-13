@@ -10,7 +10,7 @@ int main() {
 
   try {
     repl::Repl().Run();
-  } catch(std::exception ex) {
+  } catch (std::exception ex) {
     std::cerr << "REPL stopped unexpectedly. " << ex.what() << std::endl;
   }
 }
