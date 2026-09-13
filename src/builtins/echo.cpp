@@ -1,7 +1,7 @@
 #include "echo.hpp"
 
 #include <iostream>
-#include <numeric>
+#include <ranges>
 #include <string>
 #include <vector>
 
@@ -27,9 +27,8 @@ std::vector<std::string> Echo::GetArgv() const {
 
 utils::LoopDecision Echo::Run() const {
   const std::string delimiter = " ";
-  std::string result = std::accumulate(
-      std::next(argv_m.begin()), argv_m.end(), argv_m[0],
-      [&delimiter](const std::string& a, const std::string& b) { return a + delimiter + b; });
+  const std::string result =
+      argv_m | std::views::join_with(std::string(" ")) | std::ranges::to<std::string>();
   std::cout << result << std::endl;
   return utils::LoopDecision::Continue;
 }
