@@ -17,6 +17,7 @@ add_library(shell_lib
     src/builtins/builtin.cpp
     src/builtins/exit.cpp
     src/builtins/echo.cpp
+    src/builtins/type.cpp
     src/exe_builder.cpp
 )
 

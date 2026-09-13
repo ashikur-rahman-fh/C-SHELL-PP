@@ -8,6 +8,7 @@
 #include "builtins/exit.hpp"
 #include "echo.hpp"
 #include "executable.hpp"
+#include "type.hpp"
 
 namespace shell {
 
@@ -39,8 +40,10 @@ std::shared_ptr<IExecutable> ExeBuilder::build(const ExecutableContext& context)
         return std::make_shared<builtin::Exit>();
       case builtin::BuiltinType::EchoCmd:
         return std::make_shared<builtin::Echo>();
+      case builtin::BuiltinType::TypeCmd:
+        return std::make_shared<builtin::Type>();
       default:
-        throw std::logic_error{"Invalid builtin type"};
+        throw std::logic_error{"Invalid builtin type."};
     }
   }
 

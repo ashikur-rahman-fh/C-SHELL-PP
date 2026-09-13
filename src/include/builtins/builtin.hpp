@@ -10,11 +10,13 @@ namespace builtin {
 enum BuiltinType {
   ExitCmd,
   EchoCmd,
+  TypeCmd,
 };
 
 const std::vector<std::pair<std::string, BuiltinType>> builtins = {
     {"exit", BuiltinType::ExitCmd},
     {"echo", BuiltinType::EchoCmd},
+    {"type", BuiltinType::TypeCmd},
 };
 
 bool IsBuiltIn(std::shared_ptr<shell::IExecutable> exe);
